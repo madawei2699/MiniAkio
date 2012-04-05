@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Just A Blog feed</title>
+<link>http://serholiu.com</link>
+<description>Hello, Just A Simple Blog.</description>
+<language>zh-cn</language>
+{% set last=posts|first %}
+<lastBuildDate>{{format(last.published)}}</lastBuildDate>
+<generator>SErHo's Blog</generator>
+<item>
+<title>{{last.title}}</title>
+<link>http://serholiu.com/{{last.slug}}</link>
+<category><![CDATA[{{last.category.name}}]]></category>
+<description><![CDATA[{{last.content}}]]></description>
+
+<guid isPermaLink="true">http://serholiu.com/{{last.slug}}</guid>
+<pubDate>{{ format(last.published)}}</pubDate>
+</item>
+{% for post in posts %}
+<item>
+<title>{{post.title}}</title>
+<link>http://serholiu.com/{{post.slug}}</link>
+<category><![CDATA[{{post.category.name}}]]></category>
+<description><![CDATA[{{post.content}}]]></description>
+
+<guid isPermaLink="true">http://serholiu.com/{{post.slug}}</guid>
+<pubDate>{{ format(post.published)}}</pubDate>
+</item>
+{% endfor %}
+</channel>
+</rss>

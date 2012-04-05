@@ -1,0 +1,12 @@
+﻿User-agent: *
+Allow: /*html$
+Disallow: /*?
+Disallow: /auth/
+Disallow: /admin
+Disallow: /wp-
+Disallow: /blog/feed
+Disallow: /page/
+# BEGIN XML-SITEMAP-PLUGIN
+Sitemap: http://serholiu.com/sitemap.xml
+# END XML-SITEMAP-PLUGIN
+

@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{% block title %}Posts-Just A Blog{% endblock %}
+{% block content %}
+  <ul class="tabs">
+  <li><a href="/admin">Home</a></li>
+  <li><a href="/post/new">New Post</a></li>
+  <li class="active"><a href="/admin/post">Post</a></li>
+  <li><a href="/admin/comment">Comment</a></li>
+  <li><a href="/admin/settings">Settings</a></li>
+</ul>
+ 
+<div class="pill-content">
+  <div class="active" id="home">
+<span class="label success">All Post</span>
+    <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Post Time</th>
+            <th>Post Title</th>
+            <th>Post Tags</th>
+            <th>Comments</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+          <tr>
+            <td>{{loop.index}}</td>
+             <td>{{post.published.strftime('%Y-%m-%d')}}</td>
+            <td><a href="/{{post.slug}}">{{post.title}}</a></td>
+            <td>{% for tag in post.tags_list() %}<a href="/tag/{{tag}}">{{tag}}</a>|{% endfor %}</td>
+            <td>{{post.comm_count}}</td>
+            <td><a href="/post/update/{{post.id}}">Update</a> | <a href="/post/del/{{post.id}}">Del</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+ 
+
+{% endblock %}

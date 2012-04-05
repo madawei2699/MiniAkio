@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{title}}-Just A Blog{% endblock %}
+{% block head %}{{content[0:168]|e}}{% endblock %}
+{% block content %}
+<article class="post">
+            <header class="group">
+                <h2>
+                    <a href="/picky/{{slug}}" title="{{title}}">{{title}}</a>
+                </h2>
+                <span class="comment-num">
+                    <a href="/picky/{{slug}}#" title="我有话说">{{date}}</a>
+                </span>
+            </header>
+            <section>
+                 {{content}}
+             </section>
+            <footer class="group">
+                <div class="tag">
+              <span class="date">Published on {{date}}</span>
+            </div>
+                
+            </footer>
+            
+        </article>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}博客所有文章-Just A Blog{% endblock %}
+{% block content %}
+<article class="post">
+          <header class="group">
+            <h2>
+      
+              <a href="/blog/all">博客所有文章</a>
+            </h2>
+            <span class="comment-num">
+              <a href="/blog/all#" title="Posts">+{{count}}</a>
+            </span>
+          </header>
+          <section>
+           
+              {% for year_posts in archives_list(posts) %}
+              
+              <h4 class="downarch">{{year_posts[0]}}</h4>
+              {% if loop.index <3 %}
+              <ul>
+                {% for post in year_posts[1] %}
+                <li class="archiveli">{{post.published.strftime('%Y-%m-%d')}}——<a href="/{{post.slug}}">{{post.title}}</a></li>
+                {% endfor %}
+              </ul>
+              {% else %}
+              <ul class="hidearch">
+                {% for post in year_posts[1] %}
+                <li class="archiveli">{{post.published.strftime('%Y-%m-%d')}}——<a href="/{{post.slug}}">{{post.title}}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+
+         
+       {% endfor %}
+          </section>
+          
+        </article>
+
+
+
+{% endblock %}

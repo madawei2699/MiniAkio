@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}在《{{name}}》下的所有文章-Just A Blog{% endblock %}
+{% block content %}
+<article class="post">
+          <header class="group">
+            <h2>
+      
+              <a href="/{{type}}/{{name}}">在《{{name}}》下的所有文章</a>
+            </h2>
+            <span class="comment-num">
+              <a href="/{{type}}/{{name}}#" title="Posts">+{{count}}</a>
+            </span>
+          </header>
+          <section>
+            <ul>
+       {%for post in posts %}
+         <li class="archiveli">{{post.published.strftime('%Y-%m-%d')}}——<a href="/{{post.slug}}">{{post.title}}</a></li>
+       {% endfor %}
+       </ul>
+          </section>
+          
+        </article>
+
+
+{% endblock %}

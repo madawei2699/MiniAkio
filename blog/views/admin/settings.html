@@ -1,0 +1,68 @@
+{% extends "admin/base.html" %}
+{% block title %}Settings-Just A Blog{% endblock %}
+{% block content %}
+<ul class="tabs">
+  <li><a href="/admin">Home</a></li>
+  <li><a href="/post/new">New Post</a></li>
+  <li><a href="/admin/post">Post</a></li>
+  <li><a href="/admin/comment">Comment</a></li>
+  <li class="active"><a href="/admin/settings">Settings</a></li>
+</ul>
+ 
+<div class="pill-content">
+  <div class="active" id="home">
+<span class="label success">Add Picky</span>
+<br><hr>
+
+<form action="/picky/upload" method="POST" enctype="multipart/form-data">
+  <fieldset>
+    <div class="clearfix">
+            <label for="xlInput3">Picky</label>
+            <div class="input">
+             <input class="input-file" name="picky" type="file">
+            </div>
+          </div><!-- /clearfix -->
+          
+       <div class="actions">
+            <input type="submit" class="btn primary" value="点击上传">
+      </div>
+  </fieldset>
+    </div>
+  </form>
+<span class="label success">Change Password</span>
+<form action="/admin/changepass" method="POST" class="newpost">
+  <fieldset>
+          <div class="clearfix">
+            <label for="xlInput3">旧密码</label>
+            <div class="input">
+              <input name="oldpass" type="password" id="oldpass" class="span4" />
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">新密码</label>
+            <div class="input">
+              <input name="newpass" type="password" id="newpass" class="span4" />
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">重复新密码</label>
+            <div class="input">
+              <input name="newpass2" type="password" class="span4" id="newpass2" />
+            </div>
+          </div><!-- /clearfix -->
+          
+       <div class="actions">
+            <input type="submit" class="btn primary" value="修改密码">
+      </div>
+  </fieldset>
+    </div>
+  </form>
+</div>
+</div>
+ 
+
+{% endblock %}
+
+{% block bottom %}
+ 
+{% endblock %}

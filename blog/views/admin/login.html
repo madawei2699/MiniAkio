@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+{% block title %}Login-Just A Blog{% endblock %}
+{% block content %}
+  <form method="post" class="login">
+  <fieldset>
+  <legend>管理员登录</legend>
+          <div class="clearfix">
+            <label for="xlInput3">Email</label>
+            <div class="input">
+              <input name="email" type="text" class="span4" id="email" />
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">管理密码</label>
+            <div class="input">
+              <input name="password" type="password" class="span4" id="pswd" />
+              
+            </div>
+          </div><!-- /clearfix -->
+       <div class="actions">
+            <input type="submit" class="btn primary" value="登录">
+          </div>
+       </fieldset>
+    </div>
+  </form>
+{% endblock %}
+
+{% block bottom %}
+  <script type="text/javascript">
+  //<![CDATA[
+
+    $(function() {
+      $("input[name=title]").select();
+      $("form.compose").submit(function() {
+          var required = ["email","pswd"];
+          var form = $(this).get(0);
+          for (var i = 0; i < required.length; i++) {
+              if (!form[required[i]].value) {
+                  $(form[required[i]]).select();
+                  return false;
+              }
+          }
+          return true;
+      });
+    });
+
+  //]]>
+  </script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}{{post.title}}-Just A Blog{% endblock %}
+{% block head %}{{post.content[0:168]|e}}{% endblock %}
+{% block content %}
+<article class="post">
+    <header class="group">
+        <h2>
+            {{post.published.strftime("%m")}}/<span class="postdate">{{post.published.strftime("%d")}}</span>
+            <a href="/{{post.slug}}" title="{{post.title}}">{{post.title}}</a>
+        </h2>
+        <span class="comment-num">
+            <a href="/{{post.slug}}#comments" title="我有话说" class="tocomments">+{{post.comm_count}}</a>
+        </span>
+    </header>
+    <section>{{post.content}}</section>
+    <footer class="group">
+        <div class="tag">
+            {% for tag in post.tags_list()%}
+            <a href="/tag/{{tag}}">{{tag}}</a><span class="sep">•</span>
+            {%endfor %}
+            <span class="date">{{post.published}}</span> 
+            Post on <a href="/category/{{post.category.slug}}">{{post.category.name}}</a>
+            {% if user is admin %}
+                <a href="/post/update/{{post.id}}">Update</a>
+                <span class="sep">•</span>
+                <a href="/post/del/{{post.id}}">Del</a>
+            {% endif %}
+        </div>
+    </footer>
+    <nav id="prev-next" class="group">
+        <div class="next-a">
+            {% if post.prev_post %} 
+            <b>下一篇:</b> 
+            <a href="/{{post.prev_post["slug"]}}" title="{{post.prev_post["title"]}}">
+                {{post.prev_post["title"]}}</a>
+            {%endif %}
+        </div>                
+        <div class="prev-a">
+            {% if post.next_post %} 
+            <b>上一篇:</b> 
+            <a href="/{{post.next_post["slug"]}}" title="{{post.next_post["title"]}}">
+                {{post.next_post["title"]}}</a>
+            {%endif %}
+        </div>         
+    </nav>
+</article>
+
+<div id="comments">
+    <h3 id="comment-num">当前有 {{post.comm_count}} 条看法&raquo;</h3>
+        <ol class="comment-list">
+            {% for comment in post.comments %}  
+            <li id="comment-{{comment.id}}" class="comment-body comment-parent comment-odd">
+                <div class="comment-parent-body group">
+                    <div class="comment-avatar">
+                        <img class="avatar" src="{{ comment.gravatar_url(40) }}" alt="枫叶红秋雨" width="40" 
+                        height="40" />
+                    </div>
+                <div class="comment-header">
+                    <span class="comment-author">
+                        <a href="{{ comment.url }}" rel="external nofollow">{{ comment.author|e }}</a>
+                    </span>
+                    <span class="sep">发表于</span><span class="comment-meta">{{ comment.published}}</span>
+                    {% if user is admin %}
+                    <a href="/comment/del/{{comment.id}}">Del</a>
+                    {% endif %}
+                    <span class="comment-reply">
+                        <a href="/{{ post.slug }}#" rel="nofollow" 
+                         onclick="replyOne('{{ comment.author}}','{{ comment.id }}')">回复</a>
+                    </span>
+                </div>
+                <div class="comment-content">{{ comment.content|unquote }}</div>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>               
+    <div id="respond-post" class="respond">
+        <h3 id="response">有话要说 &raquo;</h3>
+        <form method="post" action="/comment/new" id="comment_form">
+            <p>
+                <input type="text" name="name" id="author" class="text" size="15" value="" />
+                <label for="author">昵称：</label>
+            </p>
+            
+            <p>
+                <input type="text" name="email" id="email" class="text" size="15" value="" />
+                <label for="author">邮箱：</label>
+            </p>
+            <p>
+                <input type="text" name="url" id="url" class="text" size="15" value="" />
+                <label for="url">网站：</label>
+                
+            </p>
+            <p>评论功能完善中，麻烦输入验证码123456:&nbsp;&nbsp;<input type="text" name="check" id="check"  class="text" placeholder="输入123456" /></p>
+            <p id="com-textarea">
+                <textarea id="comment" name="content" class="textarea" 
+                onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('submit').click();return false};"></textarea> 
+                <input type="submit" value="提交看法/Ctrl + Enter"  class="button" />
+            </p>
+            <input type="hidden" name="postid" value="{{ post.id }}" />
+            <input type="hidden" name="parent" value="0" />
+        </form>
+    </div>       
+</div>
+{% endblock %}
+{% block bottom %}
+{% endblock %}

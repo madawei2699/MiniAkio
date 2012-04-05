@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{%- block title -%}
+{%-if page==1 -%}
+  Just A Blog |Hello, Just A Simple Blog.
+{%- else -%}
+第{{page}}页——Just A Blog
+{%- endif -%}
+{%- endblock -%}
+{% block content %}
+{%for post in posts %}
+  <article class="post">
+          <header class="group">
+            <h2>
+              {{post.published.strftime("%m")}}/<span class="postdate">{{post.published.strftime("%d")}}</span>
+              <a href="/{{post.slug}}">{{post.title}}</a>
+            </h2>
+            <span class="comment-num">
+              <a href="/{{post.slug}}#comments" title="我有话说" class="tocomments">+{{post.comm_count}}</a>
+            </span>
+          </header>
+          <section>
+            {{post.content|more_split}} 
+          </section>
+          <footer class="group">
+            <div class="tag">
+              {% for tag in post.tags_list()%}
+              <a href="/tag/{{tag}}">{{tag}}</a><span class="sep">•</span>
+              {%endfor %}
+              <span class="date">{{post.published}}</span> Post on <a href="/category/{{post.category.slug}}">{{post.category.name}}</a>
+            </div>
+            
+          </footer>
+        </article>
+{% endfor %}
+<nav id="prev-next" class="pages group">
+  <div>
+    {% if page==1 %}
+      <a class="arch" href="/page/2">Read More</a>
+    {% else %}
+      {% if page==2 %}
+        <a class="prev-a" href="/">Newer &rarr;</a>
+      {% else %}
+        <a class="prev-a" href="/page/{{page-1}}">Newer &rarr;</a>
+      {% endif %}
+      <a class="arch" href="/blog/all">{{pages}} / {{page}}</a>
+      {% if  page<pages %}
+      <a class="next-a" href="/page/{{page+1}}">&larr; Older</a>
+      {% endif %}
+    {% endif %}
+    </div>
+       </nav>
+
+
+{% endblock %}

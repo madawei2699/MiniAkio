@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> {% block title %}Just A Blog{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/static/style/admin.css" type="text/css" />
+    {% block head %}<meta name="description" content="代码分享">{% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="header box clearfix">
+        <div class="hright">
+          {% if user is admin %}
+           <a href="/post/new"><button class="btn success">New Post</button></a>
+           {% endif %}
+        </div>
+        <div class="hleft box">
+          <h1><a href="/">Just A Blog</a></h1>
+        </div>
+      </div>
+      <div id="content">{% block content %}{% endblock %}</div>
+    
+    </div>
+
+    <div id="footer">
+      <p>&copy; MiniAkio 2012 &nbsp;&nbsp;Code in <a href="https://github.com/SerhoLiu/MiniAkio">Github</a> By <a href="http://serholiu.com">SErHo</a></p>
+      <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.6.2/jquery.min.js"></script>
+    {% block bottom %}{% endblock %}
+    </div>
+  </body>  
+</html>

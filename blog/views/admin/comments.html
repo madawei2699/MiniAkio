@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% block title %}Comments-Just A Blog{% endblock %}
+{% block content %}
+  <ul class="tabs">
+  <li><a href="/admin">Home</a></li>
+  <li><a href="/post/new">New Post</a></li>
+  <li><a href="/admin/post">Post</a></li>
+  <li class="active"><a href="/admin/comment">Comment</a></li>
+  <li><a href="/admin/settings">Settings</a></li>
+</ul>
+ 
+<div class="pill-content">
+  <div class="active" id="home">
+  <span class="label success">New Comment</span>
+    <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Post Time</th>
+            <th>Author</th>
+            <th>Content</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+          <tr>
+            <td><a href="{{comment.get_url()}}">{{loop.index}}</a></td>
+             <td>{{comment.published.strftime('%Y-%m-%d')}}</td>
+            <td><a href="{{comment.url}}">{{comment.author}}</a></td>
+            <td>{{comment.content}}</td>
+            <td><a href="/comment/del/{{comment.id}}">Del</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+ 
+
+{% endblock %}

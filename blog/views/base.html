@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7 ]><html class="ie ie6"> <![endif]--> 
+<!--[if IE 7 ]><html class="ie ie7"> <![endif]--> 
+<!--[if IE 8 ]><html class="ie ie8"> <![endif]--> 
+<!--[if IE 9 ]><html class="ie ie9"> <![endif]--> 
+<!--[if (gt IE 9)|!(IE)]><!--><html><!--<![endif]-->
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>{% block title %}Just A Blog |Hello,This is my blog.{% endblock %}</title>
+<link rel="shortcut icon" type="image/ico" href="/static/favicon.ico">
+<link rel="stylesheet" type="text/css" media="all" href="{{'static/style/blog.css'|static_url}}" />
+<link rel="stylesheet" href="{{'static/style/syntax.css'|static_url}}" type="text/css" />
+
+<!-- IE HTML5 -->
+<!--[if lte IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!--[if IE 6]>
+<script type="text/javascript" src="static/js/DD_belatedPNG.js"></script>
+<script type="text/javascript">
+  DD_belatedPNG.fix('.rssfeed, img');
+</script>
+<![endif]-->
+
+<meta name="description" content="{% block head %}Just A Blog{% endblock %}" />
+<meta name="generator" content="MiniAkio" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+</head>
+<body>
+<!--[if lt IE 9]>
+<div class="notice">推荐使用 chrome/safari/firefox/oprea/ie9 浏览,可获得最佳体验效果！<a href="#" onclick="$(this).parent().remove();return false;">[关闭提示]</a></div>
+<![endif]-->
+<header id="hd">
+  <div id="logo">
+    <a href="/" title="SErHo's Blog">
+      <h1>Simple Blog</h1>
+      <span>Hello,Just A Simple Blog.</span>
+    </a>
+  </div>
+  <nav id="nav">
+    <ul class="group">
+      <li  class="active" ><a href="/">Home</a></li>
+      <li><a href="/picky/all">Picky</a></li>
+      <li><a href="/blog/all">文章存档</a></li>
+      <li><a href="/picky/links">友情链接</a></li>
+      <li><a href="/picky/about-blog">关于博客</a></li>
+      <li><a href="/search/all">搜索一下</a></li>
+    </ul>
+  </nav>
+  <a href="/blog/feed" target="_blank" title="订阅本站" class="rssfeed"><span>订阅本站</span></a>
+</header>
+
+<section id="wrap" class="group">
+  <section id="content">
+    {% block content %}{% endblock %}
+  </section>
+</section>
+<aside id="as">
+  {% include "sidebar.html" %}  
+</aside>
+
+<footer id="fd">
+  <div id="footer-inner">
+    <p class="copyright">&copy; 2009-2012 <a href="/" title="By Serho Liu">Just A Blog</a>.Theme by <a href="http://whyyou.me/typecho/HTML5CSS3单栏风格皮肤.html" rel="nofollow">Lauyoume</a>.Powered by <a href="https://github.com/SerhoLiu/MiniAkio" target="_blank">MiniAkio</a>.</p>
+  </div>
+</footer>
+  <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.6.2/jquery.min.js"></script>
+  {#<script type="text/javascript" src="/static/js/jquery.min.js"></script>#}
+  <script type="text/javascript" src="/static/js/custom.js"></script> 
+</body>
+</html>

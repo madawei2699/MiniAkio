@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Search-Just A Blog{% endblock %}
+{% block content %}
+<article class="post">
+            <header class="group">
+                <h2>
+                    <a href="/search/all" title="Search">Search</a>
+                </h2>
+            </header>
+            <section>
+                <div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'zh-CN'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl(
+      '011674547521218553784:g_kuiyayhwy');
+
+    customSearchControl.setResultSetSize(google.search.Search.SMALL_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+<link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
+             </section>
+            
+        </article>
+
+{% endblock %}

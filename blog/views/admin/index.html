@@ -1,0 +1,71 @@
+{% extends "admin/base.html" %}
+{% block title %}Admin-Just A Blog{% endblock %}
+{% block content %}
+  <ul class="tabs">
+  <li class="active"><a href="#home">Home</a></li>
+  <li><a href="/post/new">New Post</a></li>
+  <li><a href="/admin/post">Post</a></li>
+  <li><a href="/admin/comment">Comment</a></li>
+  <li><a href="/admin/settings">Settings</a></li>
+</ul>
+ 
+<div class="pill-content">
+  <div class="active" id="home">
+  <blockquote>
+  <p>Hello {{author.username}}，从{{author.join_date.strftime('%Y-%m-%d')}}到现在，在{{cate_count}}个分类下，你一共
+     写了{{post_count}}篇文章，获得留言{{comm_count}}条，Tag一共{{tag_count}}个。
+  </p>
+</blockquote>
+<span class="label success">New Post</span>
+    <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Post Time</th>
+            <th>Post Title</th>
+            <th>Post Tags</th>
+            <th>Comments</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+          <tr>
+            <td>{{loop.index}}</td>
+             <td>{{post.published.strftime('%Y-%m-%d')}}</td>
+            <td><a href="/{{post.slug}}">{{post.title}}</a></td>
+            <td>{% for tag in post.tags_list() %}<a href="/tag/{{tag}}">{{tag}}</a>|{% endfor %}</td>
+            <td>{{post.comm_count}}</td>
+            <td><a href="/post/update/{{post.id}}">Update</a> | <a href="/post/del/{{post.id}}">Del</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  <span class="label success">New Comment</span>
+    <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Post Time</th>
+            <th>Author</th>
+            <th>Content</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+          <tr>
+            <td><a href="{{comment.get_url()}}">{{loop.index}}</a></td>
+             <td>{{comment.published.strftime('%Y-%m-%d')}}</td>
+            <td><a href="{{comment.url}}">{{comment.author}}</a></td>
+            <td>{{comment.content}}</td>
+            <td><a href="/comment/del/{{comment.id}}">Del</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+ 
+
+{% endblock %}

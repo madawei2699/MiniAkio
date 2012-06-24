@@ -45,7 +45,7 @@ class Post(BaseModel):
     comm_count = IntegerField()
 
     def tags_list(self):
-        tags = self.tags.split(",")
+        tags = [tag.strip() for tag in self.tags.split(",")]
         return set(tags)
 
     @property

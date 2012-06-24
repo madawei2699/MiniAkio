@@ -57,7 +57,7 @@ def page_post(num):
 
 @blog.route('/tag/<tag>')
 def tag_archive(tag):
-    tag = tag.decode('utf-8')
+    tag = tag.decode('utf-8').strip()
     try:
         tags = Tag.select().where(name=tag)
     except Tag.DoesNotExist:
@@ -187,9 +187,9 @@ def post_update_post(id):
     tag_list = set(tags.split(","))
     for tag in tag_list:
         try:
-            Tag.get(name=tag, post_id=postid)
+            Tag.get(name=tag.strip(), post_id=postid)
         except Post.DoesNotExist:
-            Tag.create(name=tag, post_id=postid)
+            Tag.create(name=tag.strip(), post_id=postid)
     redirect("/%s" % slug)
 
 

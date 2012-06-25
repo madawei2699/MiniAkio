@@ -15,22 +15,6 @@ def index():
     return template('index.html', posts=posts, page=1)
 
 
-#Redirect 301............
-@blog.route('/<slug>/')
-def redirect_post(slug='test-post'):
-    redirect("/%s" % slug, code=301)
-
-
-@blog.route('/tag/<tag>/')
-def redirect_tag(tag):
-    redirect("/tag/%s" % tag, code=301)
-
-
-@blog.route('/page/<num:int>/')
-def redirect_page(num):
-    redirect("/page/%d" % int(num), code=301)
-
-
 @blog.error(404)
 def error404(error):
     return template('e404.html')
